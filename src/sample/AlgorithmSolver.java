@@ -46,16 +46,6 @@ public class AlgorithmSolver<E> {
         return null;
     }
 
-    /**
-     * Send back an arrayList of positions representing the path from start to finish
-     * @param path
-     * @param finish
-     * @return
-     */
-    private List makePath(HashSet<Element<E>> path,Element finish){
-        return null;
-    }
-
     /*
     public void Largeurtest(Maze maze)
     {

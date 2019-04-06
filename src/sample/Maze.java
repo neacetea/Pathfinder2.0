@@ -28,8 +28,7 @@ public class Maze implements Explorable<Position> {
 
 		int i=e.getI();
 		int j=e.getJ();
-
-		//Checkinf if left is available
+		
 		if(i-1>=0){
 			if(map[i-1][j]==WALKABLE_CHAR){
 				positions.add(new Position(i-1,j));
