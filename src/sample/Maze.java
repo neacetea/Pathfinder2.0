@@ -1,17 +1,61 @@
 package sample;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Maze implements Explorable<Position> {
 	
-	public Position Start, Goal;
+	public Position start, goal;
 	public String name;
-	char[][] map = {{'0','0','1','1','0'},{'0','0','0','1','0'},{'0','1','0','0','0'},{'0','1','1','1','1'},{'0','0','0','0','0'}};
+	char[][] map ;
 
-	public Position[] GetNextSteps(Position e) {
+	public final static char WALKABLE_CHAR='0';
+
+	public Maze(){
+
+	}
+
+	public Maze(char[][] map,Position start,Position goal){
+		this.map=map;
+		this.start =start;
+		this.goal =goal;
+	}
+
+	public List<Position> getNextSteps(Position e) {
 		
-		Position[] positions = new Position[4];
-		
+		List<Position> positions = new ArrayList<Position>();
+
+		int i=e.getI();
+		int j=e.getJ();
+
+		//Checkinf if left is available
+		if(i-1>=0){
+			if(map[i-1][j]==WALKABLE_CHAR){
+				positions.add(new Position(i-1,j));
+			}
+		}
+
+		if(i+1<map.length){
+			if(map[i+1][j]==WALKABLE_CHAR){
+				positions.add(new Position(i+1,j));
+			}
+		}
+
+		if(j-1>=0){
+			if(map[i][j-1]==WALKABLE_CHAR){
+				positions.add(new Position(i,j-1));
+			}
+		}
+
+		if(j+1<map[i].length){
+			if(map[i][j+1]==WALKABLE_CHAR){
+				positions.add(new Position(i,j+1));
+			}
+		}
+
+		return positions;
+		/*
 		try{
 			positions[0] = map[e.i-1][e.j] == '0' ? new Position(e.i-1, e.j) : null;
 			if(positions[0] != null)
@@ -44,19 +88,19 @@ public class Maze implements Explorable<Position> {
 		catch(Exception exception){
 			positions[3] = null;
 		}
-		return positions;
+		*/
 	}
 
-	public boolean IsArrived(Position e) {
-		if(e.i == Goal.i && e.j == Goal.j)
+	public boolean isArrived(Position e) {
+		if(e.i == goal.i && e.j == goal.j)
 			return true;
 		else
 			return false;
 	}
 
-	public Position GetStart() {
+	public Position getStart() {
 		
-		return Start;
+		return start;
 	}
 	
 	void BuildMatrice(){
@@ -79,9 +123,9 @@ public class Maze implements Explorable<Position> {
 			char ch;
 			name = br.readLine();
 			String position = br.readLine();
-			Start = new Position(Integer.parseInt(position.split("\t")[1]),Integer.parseInt(position.split("\t")[0])+4);
+			start = new Position(Integer.parseInt(position.split("\t")[1]),Integer.parseInt(position.split("\t")[0])+4);
 			position = br.readLine();
-			Goal = new Position(Integer.parseInt(position.split("\t")[1]),Integer.parseInt(position.split("\t")[0])+4);
+			goal = new Position(Integer.parseInt(position.split("\t")[1]),Integer.parseInt(position.split("\t")[0])+4);
 			position = br.readLine();
 			map = new char[Integer.parseInt(position.split("\t")[1])][Integer.parseInt(position.split("\t")[0])+4];
 			fr.close();

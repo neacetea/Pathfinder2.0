@@ -1,9 +1,11 @@
 package sample;
 
+import java.util.List;
+
 public interface Explorable<E> {
 	
-	public E[] GetNextSteps(E e);
-	public E GetStart();
-	public boolean IsArrived(E e);
+	public List<E> getNextSteps(E e);
+	public E getStart();
+	public boolean isArrived(E e);
 
 }
