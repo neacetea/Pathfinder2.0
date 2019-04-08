@@ -64,7 +64,7 @@ public class Controller
 	public void Resolve()
 	{
 		if(currentMaze != null) {
-			solver.Largeur(currentMaze);
+			//solver.Largeur(currentMaze);
 		}
 	}
 
