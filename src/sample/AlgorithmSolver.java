@@ -74,7 +74,9 @@ public class AlgorithmSolver<E> {
                     if(!exploredElementsList.contains(actual.hashCode())){
                         //Process cost
                         actual.setGCost(graph.processGCost(eltPreviousStep.getData(),actual.getData(),eltPreviousStep.getGCost()));
+                        double Gcost=actual.getGCost();
                         actual.setHCost(graph.processHCost(goal.getData(),actual.getData()));
+                        double hcost=actual.getHCost();
                         actual.setFCost(actual.getHCost()+actual.getGCost());
 
                         toExploreQueue.add(actual);
@@ -82,7 +84,6 @@ public class AlgorithmSolver<E> {
 
                 }
             }
-
 
         }
 

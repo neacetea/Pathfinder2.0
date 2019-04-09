@@ -54,40 +54,6 @@ public class Maze implements HeuristicallyExplorable<Position> {
 		}
 
 		return positions;
-		/*
-		try{
-			positions[0] = map[e.i-1][e.j] == '0' ? new Position(e.i-1, e.j) : null;
-			if(positions[0] != null)
-				map[e.i-1][e.j] = 'x';
-		}
-		catch(Exception exception){
-			positions[0] = null;
-		}
-		try{
-			positions[1] = map[e.i][e.j+1] == '0' ? new Position(e.i, e.j+1) : null;
-			if(positions[1] != null)
-				map[e.i][e.j+1] = 'x';
-		}
-		catch(Exception exception){
-			positions[1] = null;
-		}
-		try{
-			positions[2] = map[e.i+1][e.j] == '0' ? new Position(e.i+1, e.j) : null;
-			if(positions[2] != null)
-				map[e.i+1][e.j] = 'x';
-		}
-		catch(Exception exception){
-			positions[2] = null;
-		}
-		try{
-			positions[3] = map[e.i][e.j-1] == '0' ? new Position(e.i, e.j-1) : null;
-			if(positions[3] != null)
-				map[e.i][e.j-1] = 'x';
-		}
-		catch(Exception exception){
-			positions[3] = null;
-		}
-		*/
 	}
 
 	public boolean isArrived(Position e) {
@@ -105,26 +71,26 @@ public class Maze implements HeuristicallyExplorable<Position> {
 		return goal;
 	}
 
-	public float processFCost(Position previous,Position actual,Position goal, float previousG){
+	public double processFCost(Position previous,Position actual,Position goal, double previousG){
 		return processGCost(previous,actual,previousG)+processHCost(goal,actual);
 	}
 
-	public float processGCost(Position previous,Position actual,float previousG){
-		float previousToSelfDistance=EuclidianDistance(actual,previous);
+	public double processGCost(Position previous,Position actual,double previousG){
+		double previousToSelfDistance=EuclidianDistance(actual,previous);
 
 		return previousToSelfDistance+previousG;
 	}
 
-	public float processHCost(Position goal,Position actual){
+	public double processHCost(Position goal,Position actual){
 		return EuclidianDistance(actual,goal);
 	}
 
-	private float EuclidianDistance(Position pos1,Position pos2){
-		return (float) Math.sqrt( Math.pow(pos1.getI()-pos2.getI(),2)+Math.pow(pos2.getJ()-pos2.getJ(),2));
+	private double EuclidianDistance(Position pos1,Position pos2){
+		return Math.sqrt( Math.pow(pos1.getI()-pos2.getI(),2)+Math.pow(pos1.getJ()-pos2.getJ(),2));
 	}
 
-	void BuildMatrice(){
-		
+	public static void main (String [] args){
+
 	}
 
 	/**

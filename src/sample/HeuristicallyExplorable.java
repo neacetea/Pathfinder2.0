@@ -2,7 +2,7 @@ package sample;
 
 public interface HeuristicallyExplorable<E> extends Explorable<E> {
 
-    public float processFCost(E previous,E actual, E goal,float previousG );
-    public float processGCost(E previous,E actual,float previousG);
-    public float processHCost(E goal,E actual);
+    public double processFCost(E previous,E actual, E goal,double previousG );
+    public double processGCost(E previous,E actual,double previousG);
+    public double processHCost(E goal,E actual);
 }

@@ -8,10 +8,17 @@ public class Position {
 	{
 		this.i = i; this.j = j;
 	}
-
-	//Use an 'elegant pairing function', i&j must stay positive
+	@Override
 	public int hashCode() {
-		return (i >= j) ? (i * i + i + j) : (j * j + i);
+		int tmp = ( j +  ((i+1)/2));
+		return i +  ( tmp * tmp);
+	}
+
+	@Override
+	public boolean equals(Object p1){
+		if(!(p1 instanceof Position)) return false;
+		Position p2=(Position) p1;
+		return (this.i==p2.getI()&&this.j==p2.getJ());
 	}
 
 	public int getI() {
@@ -20,21 +27,6 @@ public class Position {
 
 	public int getJ() {
 		return j;
-	}
-
-	public float processFCost(){
-
-		return 1.0f;
-	}
-
-	public float processGCost(Position previous,float previousG){
-		float previousToSelfDistance=EuclidianDistance(previous);
-
-		return previousToSelfDistance+previousG;
-	}
-
-	public float processHCost(Position goal){
-		return EuclidianDistance(goal);
 	}
 
 	private float EuclidianDistance(Position pos2){
