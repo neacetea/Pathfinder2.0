@@ -72,7 +72,10 @@ public class Controller
 	public void Resolve()
 	{
 		if(currentMaze != null) {
-			solver.widthFirst(currentMaze);
+            Element<Position> finishAlgo=solver.widthFirst(currentMaze);;
+
+            currentMaze.map =currentMaze.sendResolution(finishAlgo);
+            drawMap();
 		}
 	}
 
@@ -179,10 +182,15 @@ public class Controller
 				ImageView v;
 				if(currentMaze.map[i][j] == '0')
 					v = new ImageView("ressources/grass.jpg");
-				else
+				else if(currentMaze.map[i][j] == '1')
 				{
 					v = new ImageView("ressources/dirt.jpg");
 				}
+				else
+                {
+                    v = new ImageView("ressources/grass2.jpg");
+
+                }
 				Maze.add(v,i,j);
 			}
 		}
