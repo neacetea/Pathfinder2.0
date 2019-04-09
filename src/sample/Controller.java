@@ -3,6 +3,7 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -30,6 +31,7 @@ public class Controller
 	@FXML public Label Pathlength;
 	@FXML public Label ElementsExplored;
 	@FXML public GridPane Maze;
+	@FXML public ChoiceBox<String> ListAlgo;
 
 	List<String> listMaze = new ArrayList<String>();
 	public String indexFile;
@@ -39,6 +41,8 @@ public class Controller
 	{
 		solver = new AlgorithmSolver();
 		fillComboBox();
+		ListAlgo.getItems().add("Parcour en largeur");
+		ListAlgo.setValue("Parcour en largeur");
 	}
 
 	public void fillComboBox()
