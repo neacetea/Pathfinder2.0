@@ -12,37 +12,38 @@ public class AlgorithmSolver<E> {
         nodeList=new HashSet<Element<E>>();
     }
 
-    public Element<E> WidthFirst(Explorable<E> graph){
+    public Element<E> widthFirst(Explorable<E> graph){
         //Variable initializations
         Element<E> start=new Element<E>(graph.getStart());
         Element<E> finish;
         Queue<Element<E>> toExploreQueue=new LinkedList<Element<E>>();
         boolean arrived=false;
         List<E> nextSteps;
+        HashSet<Element<E>> exploredElementsList=new HashSet<Element<E>>();
 
         //Adding the first step
         toExploreQueue.add(start);
 
         //We will continue until there is no element left to explore, or until we has arrived ofc
         while(toExploreQueue.size()!=0&&arrived==false){
-        Element<E> eltPreviousStep=toExploreQueue.remove();
-        nextSteps=graph.getNextSteps(eltPreviousStep.getData());
-        for(E sglNode : nextSteps){
-            Element<E> eltNode=new Element<E>(sglNode,eltPreviousStep);
-            if(graph.isArrived(sglNode)) {
-                finish = eltNode;
-                return finish;
-            }
-            else{
-                //if the node is'nt already contained we add it
-                if(!exploredElementsList.contains(eltNode)){
-                    exploredElementsList.add(eltNode);
-                    toExploreQueue.add(eltNode);
+            Element<E> eltPreviousStep=toExploreQueue.remove();
+            nextSteps=graph.getNextSteps(eltPreviousStep.getData());
+            for(E sglNode : nextSteps){
+                Element<E> eltNode=new Element<E>(sglNode,eltPreviousStep);
+                if(graph.isArrived(sglNode)) {
+                    finish = eltNode;
+                    return finish;
+                }
+                else{
+                    //if the node is'nt already contained we add it
+                    if(!exploredElementsList.contains(eltNode)){
+                        exploredElementsList.add(eltNode);
+                        toExploreQueue.add(eltNode);
+                    }
                 }
             }
-        }
 
-    }
+        }
         return null;
     }
 

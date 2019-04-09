@@ -21,7 +21,7 @@ public class ConsoleMain {
         ConsoleView.showLab(maze.map);
 
         AlgorithmSolver<Position> algo=new AlgorithmSolver<Position>();
-        Element<Position> finishAlgo=algo.WidthFirst(maze);
+        Element<Position> finishAlgo=algo.widthFirst(maze);
 
         char [] [] resolution=maze.sendResolution(finishAlgo);
         ConsoleView.showLab(resolution);
