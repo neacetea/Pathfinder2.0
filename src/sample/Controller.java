@@ -72,7 +72,7 @@ public class Controller
 	public void Resolve()
 	{
 		if(currentMaze != null) {
-			solver.WidthFirst(currentMaze);
+			solver.widthFirst(currentMaze);
 		}
 	}
 
