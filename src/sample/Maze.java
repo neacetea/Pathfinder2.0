@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Maze implements Explorable<Position> {
+public class Maze implements HeuristicallyExplorable<Position> {
 	
 	public Position start, goal;
 	public String name;
@@ -28,7 +28,7 @@ public class Maze implements Explorable<Position> {
 
 		int i=e.getI();
 		int j=e.getJ();
-		
+
 		if(i-1>=0){
 			if(map[i-1][j]==WALKABLE_CHAR){
 				positions.add(new Position(i-1,j));
@@ -98,12 +98,49 @@ public class Maze implements Explorable<Position> {
 	}
 
 	public Position getStart() {
-		
 		return start;
 	}
-	
+
+	public Position getGoal(){
+		return goal;
+	}
+
+	public float processFCost(Position previous,Position actual,Position goal, float previousG){
+		return processGCost(previous,actual,previousG)+processHCost(goal,actual);
+	}
+
+	public float processGCost(Position previous,Position actual,float previousG){
+		float previousToSelfDistance=EuclidianDistance(actual,previous);
+
+		return previousToSelfDistance+previousG;
+	}
+
+	public float processHCost(Position goal,Position actual){
+		return EuclidianDistance(actual,goal);
+	}
+
+	private float EuclidianDistance(Position pos1,Position pos2){
+		return (float) Math.sqrt( Math.pow(pos1.getI()-pos2.getI(),2)+Math.pow(pos2.getJ()-pos2.getJ(),2));
+	}
+
 	void BuildMatrice(){
 		
+	}
+
+	/**
+	 *
+	 * @param finalLinkedElement an element that link the solution
+	 * @return
+	 */
+	public char [][] sendResolution(Element<Position> finalLinkedElement){
+		char [] [] resolution=map.clone();
+		Element<Position> current=finalLinkedElement.getPrevious();
+
+		while(current.getPrevious()!=null){
+			resolution[current.getData().i][current.getData().j]='M';
+			current=current.getPrevious();
+		}
+		return resolution;
 	}
 
 	public void readFile(String filename)
