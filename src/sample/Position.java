@@ -22,5 +22,22 @@ public class Position {
 		return j;
 	}
 
+	public float processFCost(){
 
+		return 1.0f;
+	}
+
+	public float processGCost(Position previous,float previousG){
+		float previousToSelfDistance=EuclidianDistance(previous);
+
+		return previousToSelfDistance+previousG;
+	}
+
+	public float processHCost(Position goal){
+		return EuclidianDistance(goal);
+	}
+
+	private float EuclidianDistance(Position pos2){
+		return (float) Math.sqrt( Math.pow(i-pos2.getI(),2)+Math.pow(j-pos2.getJ(),2));
+	}
 }

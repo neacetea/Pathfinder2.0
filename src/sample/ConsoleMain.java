@@ -1,7 +1,5 @@
 package sample;
 
-import java.util.HashSet;
-
 public class ConsoleMain {
 
     public static void main(String[] args){
@@ -13,20 +11,17 @@ public class ConsoleMain {
         maze.start =start;
         maze.goal =finish;
 
+        maze.map[0][0]='D';
+        //maze.map[0][4]='A';
         ConsoleView.showLab(maze.map);
 
         AlgorithmSolver<Position> algo=new AlgorithmSolver<Position>();
-        Element<Position> finishAlgo=algo.WidthFirst(maze);
+        Element<Position> finishAlgo=algo.widthFirst(maze);
 
-        maze.map[finishAlgo.getData().i][finishAlgo.getData().j]='A';
+        //maze.map[finishAlgo.getData().i][finishAlgo.getData().j]='A';
 
-        Element<Position> current=finishAlgo;
-        while(current.getPrevious()!=null){
-            current=current.getPrevious();
-            maze.map[current.getData().i][current.getData().j]='M';
-        }
-
-        ConsoleView.showLab(maze.map);
+        char [] [] resolution=maze.sendResolution(finishAlgo);
+        ConsoleView.showLab(resolution);
 
 
     }
