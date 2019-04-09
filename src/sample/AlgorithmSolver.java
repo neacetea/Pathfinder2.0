@@ -11,7 +11,7 @@ public class AlgorithmSolver<E> {
 
     }
 
-    public Element<E> WidthFirst(Explorable<E> graph){
+    public Element<E> widthFirst(Explorable<E> graph){
     //Variable initializations
     Element<E> start=new Element<E>(graph.getStart());
     Element<E> finish;
@@ -48,22 +48,23 @@ public class AlgorithmSolver<E> {
 
     public Element<E> aStar(HeuristicallyExplorable<E> graph){
 
-        TreeMap<Integer,Element<E>> toExploreQueue=new TreeMap<Integer, Element<E>>();
+        PriorityQueue<Element<E>> toExploreQueue=new PriorityQueue<Element<E>>(30,new SortElementByAStarCost());
         boolean arrived=false;
-        List<E> nextStepsGeneric;
-        List<Element<E>> nextStepsElement=new ArrayList<Element<E>>();
-        TreeSet<Element<E>> exploredElementsList=new TreeSet<Element<E>>();
+        List<E> nextSteps;
+        HashSet<Element<E>> exploredElementsList=new HashSet<Element<E>>();
 
         Element<E> start=new Element<E>(graph.getStart());
         Element<E> goal=new Element<E>(graph.getGoal());
         start.setFCost(0);
         start.setGCost(0);
-        /*
+
+        toExploreQueue.add(start);
+
         while(toExploreQueue.size()!=0){
-            Element<E> eltPreviousStep=toExploreQueue.get();
-            nextStepsGeneric=graph.getNextSteps(eltPreviousStep.getData());
+            Element<E> eltPreviousStep=toExploreQueue.remove();
+            nextSteps=graph.getNextSteps(eltPreviousStep.getData());
             //
-            for(E sglStep : nextStepsGeneric){
+            for(E sglStep : nextSteps){
                 //We first create the Element without it's cost to spare some CPU in case we are arrived
                 Element<E> actual=new Element<E>(sglStep,eltPreviousStep);
                 if(graph.isArrived(sglStep)){
@@ -76,19 +77,15 @@ public class AlgorithmSolver<E> {
                         actual.setHCost(graph.processHCost(goal.getData(),actual.getData()));
                         actual.setFCost(actual.getHCost()+actual.getGCost());
 
-                        if(!toExploreQueue.containsKey(actual.hashCode())||(toExploreQueue.get(actual.hashCode()).getFCost()>actual.getFCost()){
-                            toExploreQueue.put(actual.hashCode(),actual);
-                        }
-
+                        toExploreQueue.add(actual);
                     }
 
                 }
             }
 
-            //exploredElementsList.put(eltPreviousStep.hashCode(),eltPreviousStep);
 
         }
-        */
+
 
         return null;
     }

@@ -10,7 +10,7 @@ public class Maze implements HeuristicallyExplorable<Position> {
 	public String name;
 	char[][] map ;
 
-	public final static char WALKABLE_CHAR='0';
+	public final static String WALKABLE_CHAR="0DA";
 
 	public Maze(){
 
@@ -30,25 +30,25 @@ public class Maze implements HeuristicallyExplorable<Position> {
 		int j=e.getJ();
 
 		if(i-1>=0){
-			if(map[i-1][j]==WALKABLE_CHAR){
+			if(WALKABLE_CHAR.contains(String.valueOf(map[i-1][j]))){
 				positions.add(new Position(i-1,j));
 			}
 		}
 
 		if(i+1<map.length){
-			if(map[i+1][j]==WALKABLE_CHAR){
+			if(WALKABLE_CHAR.contains(String.valueOf(map[i+1][j]))){
 				positions.add(new Position(i+1,j));
 			}
 		}
 
 		if(j-1>=0){
-			if(map[i][j-1]==WALKABLE_CHAR){
+			if(WALKABLE_CHAR.contains(String.valueOf(map[i][j-1]))){
 				positions.add(new Position(i,j-1));
 			}
 		}
 
 		if(j+1<map[i].length){
-			if(map[i][j+1]==WALKABLE_CHAR){
+			if(WALKABLE_CHAR.contains(String.valueOf(map[i][j+1]))){
 				positions.add(new Position(i,j+1));
 			}
 		}

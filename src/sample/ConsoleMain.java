@@ -1,7 +1,5 @@
 package sample;
 
-import java.util.HashSet;
-
 public class ConsoleMain {
 
     public static void main(String[] args){
@@ -14,11 +12,11 @@ public class ConsoleMain {
         maze.goal =finish;
 
         maze.map[0][0]='D';
-        maze.map[0][4]='A';
+        //maze.map[0][4]='A';
         ConsoleView.showLab(maze.map);
 
         AlgorithmSolver<Position> algo=new AlgorithmSolver<Position>();
-        Element<Position> finishAlgo=algo.WidthFirst(maze);
+        Element<Position> finishAlgo=algo.aStar(maze);
 
         //maze.map[finishAlgo.getData().i][finishAlgo.getData().j]='A';
 
