@@ -3,9 +3,15 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -24,7 +30,8 @@ public class Controller
 	@FXML public Label ResolutionDuration;
 	@FXML public Label Pathlength;
 	@FXML public Label ElementsExplored;
-	@FXML public Pane Maze;
+	@FXML public GridPane Maze;
+	@FXML public ChoiceBox<String> ListAlgo;
 
 	List<String> listMaze = new ArrayList<String>();
 	public String indexFile;
@@ -34,7 +41,8 @@ public class Controller
 	{
 		solver = new AlgorithmSolver();
 		fillComboBox();
-
+		ListAlgo.getItems().add("Parcour en largeur");
+		ListAlgo.setValue("Parcour en largeur");
 	}
 
 	public void fillComboBox()
@@ -64,7 +72,7 @@ public class Controller
 	public void Resolve()
 	{
 		if(currentMaze != null) {
-			//solver.Largeur(currentMaze);
+			solver.WidthFirst(currentMaze);
 		}
 	}
 
@@ -142,6 +150,42 @@ public class Controller
 	{
 		currentMaze = new Maze();
 		currentMaze.readFile(ListFiles.getValue());
+		Maze.getColumnConstraints().clear();
+		Maze.getRowConstraints().clear();
+		Maze.setGridLinesVisible(true);
+		final int numCols = currentMaze.sizeY ;
+		final int numRows = currentMaze.sizeX - 4 ;
+		for (int i = 0; i < numCols; i++) {
+			ColumnConstraints colConst = new ColumnConstraints();
+			colConst.setPrefWidth(32);
+			colConst.setMinWidth(32);
+			Maze.getColumnConstraints().add(colConst);
+		}
+		for (int i = 0; i < numRows; i++) {
+			RowConstraints rowConst = new RowConstraints();
+			rowConst.setPrefHeight(32);
+			rowConst.setMinHeight(32);
+			Maze.getRowConstraints().add(rowConst);
+		}
+		drawMap();
+	}
+
+	public void drawMap()
+	{
+		for(int i = 0; i < currentMaze.sizeY ; i ++)
+		{
+			for(int j = 0; j < currentMaze.sizeX ; j++)
+			{
+				ImageView v;
+				if(currentMaze.map[i][j] == '0')
+					v = new ImageView("ressources/grass.jpg");
+				else
+				{
+					v = new ImageView("ressources/dirt.jpg");
+				}
+				Maze.add(v,i,j);
+			}
+		}
 	}
 
 	 public void  indexFiles() {
@@ -150,14 +194,6 @@ public class Controller
 			listMaze.add(indexFile);
 
 		}
-	}
-	
-	private void DrawMaze(){
-		
-	}
-
-	private void DrawSolution(){
-		
 	}
 
 	private void SelectAlgorithm(){
