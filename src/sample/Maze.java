@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Maze implements HeuristicallyExplorable<Position> {
-	
+
+	public int sizeX;
+	public int sizeY;
 	public Position start, goal;
 	public String name;
-	char[][] map ;
+	public char[][] map ;
 
 	public final static String WALKABLE_CHAR="0DA";
 
@@ -159,11 +161,13 @@ public class Maze implements HeuristicallyExplorable<Position> {
 			char ch;
 			name = br.readLine();
 			String position = br.readLine();
-			start = new Position(Integer.parseInt(position.split("\t")[1]),Integer.parseInt(position.split("\t")[0])+4);
+			start = new Position(Integer.parseInt(position.split("\t")[1]),Integer.parseInt(position.split("\t")[0]));
 			position = br.readLine();
-			goal = new Position(Integer.parseInt(position.split("\t")[1]),Integer.parseInt(position.split("\t")[0])+4);
+			goal = new Position(Integer.parseInt(position.split("\t")[1]),Integer.parseInt(position.split("\t")[0]));
 			position = br.readLine();
-			map = new char[Integer.parseInt(position.split("\t")[1])][Integer.parseInt(position.split("\t")[0])+4];
+			sizeY = Integer.parseInt(position.split("\t")[1]);
+			sizeX = Integer.parseInt(position.split("\t")[0]);
+			map = new char[Integer.parseInt(position.split("\t")[1])][Integer.parseInt(position.split("\t")[0])];
 			fr.close();
 			br.close();
 			fr = new FileReader(filename);
@@ -176,15 +180,15 @@ public class Maze implements HeuristicallyExplorable<Position> {
 						i = 0;
 					}
 					else {
-						if(y > 4) {
+						if(y > 3) {
 						ch = (char) r;
 						if (ch == '+' || ch == '-' || ch == '|') {
-							map[i][y] = '1';
-							System.out.print(map[i][y]);
+							map[i][y-4] = '1';
+							System.out.print(map[i][y-4]);
 						}
 						else if (ch == ' ') {
-							map[i][y] = '0';
-							System.out.print(map[i][y]);
+							map[i][y-4] = '0';
+							System.out.print(map[i][y-4]);
 						}
 						i++;
 					}
