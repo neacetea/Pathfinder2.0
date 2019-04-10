@@ -27,7 +27,6 @@ public class Controller
 	@FXML public Label stepCount;
 	@FXML public Label resolutionDuration;
 	@FXML public Label pathlength;
-	@FXML public Label elementsExplored;
 	@FXML public GridPane maze;
 	@FXML public ChoiceBox<String> listAlgo;
 

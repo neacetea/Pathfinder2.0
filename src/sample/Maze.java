@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe permettant de gérer un labyrinthe
+ */
 public class Maze implements HeuristicallyExplorable<Position> {
 
 	public int sizeX;
@@ -25,6 +28,11 @@ public class Maze implements HeuristicallyExplorable<Position> {
 		this.goal =goal;
 	}
 
+	/**
+	 * Methode parcourant les elements autour d'un élément fourni en paramètre.
+	 * @param e Position à partir de la quelle nous allons explorer le voisinage
+	 * @return Retourne une liste de position.
+	 */
 	public List<Position> getNextSteps(Position e) {
 		
 		List<Position> positions = new ArrayList<Position>();
@@ -166,8 +174,6 @@ public class Maze implements HeuristicallyExplorable<Position> {
 					}
 				}
 			}
-
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -180,11 +186,8 @@ public class Maze implements HeuristicallyExplorable<Position> {
 
 				if (fr != null)
 					fr.close();
-
 			} catch (IOException ex) {
-
 				ex.printStackTrace();
-
 			}
 		}
 

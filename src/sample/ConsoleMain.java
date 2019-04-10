@@ -9,7 +9,7 @@ public class ConsoleMain {
 
         //maze maze=new maze(map,start,finish);
         Maze maze=new Maze();
-        maze.readFile("D:/Code/Java/Pathfinder2.0/src/maps/map.txt");
+        maze.readFile("src/maps/map.txt");
 /*
         maze.start =start;
         maze.goal =finish;

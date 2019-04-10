@@ -13,10 +13,14 @@ public class AlgorithmSolver<E> {
         nodeList=new HashSet<Element<E>>();
     }
 
+    /**
+     * Algorithme de parcour en largeur prenant en paramètre un objet à partir du moment qu'il implémente Explorable.
+     * @param graph
+     * @return
+     */
     public Element<E> widthFirst(Explorable<E> graph){
 
         long startTime = System.currentTimeMillis();
-
 
         //Variable initializations
         Element<E> start=new Element<E>(graph.getStart());
@@ -50,9 +54,7 @@ public class AlgorithmSolver<E> {
                     }
                 }
             }
-
         }
-
         return null;
     }
 }
