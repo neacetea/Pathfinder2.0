@@ -6,13 +6,18 @@ public class AlgorithmSolver<E> {
 
 
     private HashSet<Element<E>> nodeList;
-
+    double elapsedTime;
+    public long stepCount = 0;
 
     public AlgorithmSolver(){
         nodeList=new HashSet<Element<E>>();
     }
 
     public Element<E> widthFirst(Explorable<E> graph){
+
+        long startTime = System.currentTimeMillis();
+
+
         //Variable initializations
         Element<E> start=new Element<E>(graph.getStart());
         Element<E> finish;
@@ -32,73 +37,23 @@ public class AlgorithmSolver<E> {
                 Element<E> eltNode=new Element<E>(sglNode,eltPreviousStep);
                 if(graph.isArrived(sglNode)) {
                     finish = eltNode;
+                    long stopTime = System.currentTimeMillis();
+                    elapsedTime = stopTime - startTime;
                     return finish;
                 }
                 else{
                     //if the node is'nt already contained we add it
                     if(!exploredElementsList.contains(eltNode)){
                         exploredElementsList.add(eltNode);
+                        stepCount++;
                         toExploreQueue.add(eltNode);
                     }
                 }
             }
 
         }
+
         return null;
     }
-
-    /*
-    public void Largeurtest(Maze maze)
-    {
-        maze.map[maze.start.i][maze.start.j] = 'D';
-        maze.map[maze.goal.i][maze.goal.j] = 'A';
-        Position[] NextSteps = new Position[4];
-
-        for(char[] tc : maze.map)
-        {
-            for(char c : tc)
-            {
-                System.out.print(c);
-            }
-            System.out.println();
-        }
-        Queue<Position> positionsQueue = new LinkedList<Position>();
-        positionsQueue.add(maze.start);
-
-        int longueur = 0;
-
-        while(!positionsQueue.isEmpty())
-        {
-            NextSteps = maze.getNextSteps(positionsQueue.element());
-            for(Position pos : NextSteps)
-            {
-                if(pos != null)
-                {
-                    if(maze.isArrived(pos))
-                        break;
-                    else
-                    {
-                        positionsQueue.add(pos);
-                        System.out.println("i = " + pos.i + " j = " + pos.j);
-                    }
-                }
-            }
-            if(positionsQueue.poll() == null)
-                break;
-        }
-
-        for(char[] tc : maze.map)
-        {
-            for(char c : tc)
-            {
-                System.out.print(c);
-            }
-            System.out.println();
-        }
-        System.out.println("Longueur du parcours : " + longueur);
-    }
-    */
-
-
 }
 

@@ -11,6 +11,7 @@ public class Maze implements HeuristicallyExplorable<Position> {
 	public Position start, goal;
 	public String name;
 	public char[][] map ;
+	public long solutionLenght;
 
 	public final static String WALKABLE_CHAR="0DA";
 
@@ -106,11 +107,16 @@ public class Maze implements HeuristicallyExplorable<Position> {
 
 		while(current.getPrevious()!=null){
 			resolution[current.getData().i][current.getData().j]='M';
+			solutionLenght++;
 			current=current.getPrevious();
 		}
 		return resolution;
 	}
 
+	/**
+	 * Méthode permettant de construire un tableau 2 dimensions de Char en parcourant un fichier txt.
+	 * @param filename Path du fichier à ouvrir.
+	 */
 	public void readFile(String filename)
 	{
 		BufferedReader br = null;

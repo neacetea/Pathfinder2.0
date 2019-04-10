@@ -18,7 +18,7 @@
    <top>
       <AnchorPane prefHeight="69.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="Browse" layoutX="722.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionBrowseButton" prefHeight="45.0" prefWidth="137.0" text="Browse">
+            <Button fx:id="browse" layoutX="722.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionBrowseButton" prefHeight="45.0" prefWidth="137.0" text="Browse">
                <font>
                   <Font size="20.0" />
                </font>
@@ -33,8 +33,8 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="ListAlgo" layoutX="1015.0" layoutY="16.0" prefHeight="31.0" prefWidth="218.0" />
-            <ComboBox fx:id="ListFiles" layoutX="210.0" layoutY="8.0" onAction="#setCurrentMaze" prefHeight="48.0" prefWidth="503.0" />
+            <ChoiceBox fx:id="listAlgo" layoutX="1015.0" layoutY="16.0" prefHeight="31.0" prefWidth="218.0" />
+            <ComboBox fx:id="listFiles" layoutX="210.0" layoutY="8.0" onAction="#setCurrentMaze" prefHeight="48.0" prefWidth="503.0" />
          </children>
       </AnchorPane>
    </top>
@@ -51,7 +51,7 @@
               <content>
                 <AnchorPane>
                      <children>
-                        <GridPane fx:id="Maze" alignment="CENTER" gridLinesVisible="true">
+                        <GridPane fx:id="maze" alignment="CENTER">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
                           </columnConstraints>
@@ -73,19 +73,17 @@
             <Label layoutX="206.0" layoutY="24.0" prefHeight="26.0" prefWidth="111.0" text="Step Count :" />
             <Label layoutX="393.0" layoutY="24.0" prefHeight="26.0" prefWidth="130.0" text="Resolution Duration :" />
             <Label layoutX="603.0" layoutY="24.0" prefHeight="26.0" prefWidth="111.0" text="Path Length :" />
-            <Label layoutX="714.0" layoutY="24.0" prefHeight="26.0" prefWidth="146.0" text="Elements Explored  :" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="24.0" prefHeight="26.0" prefWidth="41.0" text="0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="523.0" layoutY="24.0" prefHeight="26.0" prefWidth="41.0" text="0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="297.0" layoutY="24.0" prefHeight="26.0" prefWidth="41.0" text="0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="659.0" layoutY="24.0" prefHeight="26.0" prefWidth="41.0" text="0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="880.0" layoutY="28.0" prefHeight="19.0" prefWidth="38.0" text="0" />
+            <Label fx:id="solutionCount" alignment="CENTER" contentDisplay="CENTER" layoutX="114.0" layoutY="23.0" prefHeight="26.0" prefWidth="41.0" text="0" />
+            <Label fx:id="resolutionDuration" alignment="CENTER" contentDisplay="CENTER" layoutX="523.0" layoutY="24.0" prefHeight="26.0" prefWidth="41.0" text="0" />
+            <Label fx:id="stepCount" alignment="CENTER" contentDisplay="CENTER" layoutX="297.0" layoutY="24.0" prefHeight="26.0" prefWidth="41.0" text="0" />
+            <Label fx:id="pathlength" alignment="CENTER" contentDisplay="CENTER" layoutX="672.0" layoutY="24.0" prefHeight="26.0" prefWidth="41.0" text="0" />
          </children>
       </AnchorPane>
    </bottom>
    <center>
       <Pane prefHeight="658.0" prefWidth="384.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="Resolution" layoutX="156.0" layoutY="23.0" mnemonicParsing="false" onAction="#Resolve" prefHeight="51.0" prefWidth="186.0" text="Resolution">
+            <Button fx:id="resolution" layoutX="156.0" layoutY="23.0" mnemonicParsing="false" onAction="#Resolve" prefHeight="51.0" prefWidth="186.0" text="Resolution">
                <font>
                   <Font size="24.0" />
                </font>

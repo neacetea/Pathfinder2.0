@@ -7,7 +7,7 @@ public class ConsoleMain {
         //Position finish=new Position(20,20);
         char[][] map = {{'0','0','1','1','0'},{'0','0','0','1','0'},{'0','1','0','0','0'},{'0','1','1','1','1'},{'0','0','0','1','0'}};
 
-        //Maze maze=new Maze(map,start,finish);
+        //maze maze=new maze(map,start,finish);
         Maze maze=new Maze();
         maze.readFile("D:/Code/Java/Pathfinder2.0/src/maps/map.txt");
 /*
